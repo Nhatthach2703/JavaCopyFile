@@ -146,9 +146,7 @@ public class Library {
             if (prop.getProperty("PATH").length() == 0) {
                 System.err.println("Folder Destination is not input");
             }
-            exist = prop.getProperty("COPY_FOLDER") != null
-                    && prop.getProperty("DATA_TYPE") != null
-                    && prop.getProperty("PATH") != null;
+            exist = prop.getProperty("COPY_FOLDER") != null && prop.getProperty("DATA_TYPE") != null && prop.getProperty("PATH") != null;
         } catch (IOException ex) {
             ex.printStackTrace();
             System.err.println("Can read file configure!");
@@ -175,5 +173,20 @@ public class Library {
             System.err.println("Can't make folder Destination");
         }
         return checkInformationConfig;
+    }
+    
+    public String checkInputPathFile(String promt) {
+        System.out.print(promt);
+        while (true) {
+            String result = sc.nextLine().trim();
+            File file = new File(result);
+            //check file exist or not and path must be file
+            if (!file.exists() || !file.isFile()) {
+                System.err.println("Path doesn't exist!!!");
+                System.out.print("Enter again: ");
+            } else {
+                return result;
+            }
+        }
     }
 }
